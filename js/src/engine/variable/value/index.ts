@@ -1,7 +1,7 @@
 export class VariableValue {
   private m_type: Type;
   m_idx: number; /// index into value vector
-  valRef(): number;
+  valRef: number;
 
   lhs(): boolean {
     return this.m_type == flow || this.m_type == tempFlow
@@ -27,7 +27,7 @@ export class VariableValue {
   name: string; // full marked up name of this variable
 
   value(): number {
-    return this.valRef();
+    return this.valRef;
   }
 
   idx(): number {
@@ -73,12 +73,13 @@ export class VariableValue {
 
   /// construct a valueId
   static valueId(scope: int, name: string): string {
-    const stripname = stripActive(uqName(name))
-    if (scope < 0) return ':' + stripname;
-    return str(scope) + ':' + stripname
+    const _name = this.uqName(name)
+    if (scope < 0) return ':' + _name;
+    return new String(scope) + ':' + _name
   }
+
   static valueId(name: string): string {
-    return valueId(scope(name), name);
+    return this.valueId(this.scope(name), name);
   }
 
   /// extract scope from a qualified variable name
@@ -88,6 +89,5 @@ export class VariableValue {
   }
   /// extract unqualified portion of name
   static uqName(const name: string): string {
-
   }
 }
