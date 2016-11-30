@@ -35,8 +35,8 @@ export class Expresssion {
     cache.insertAnonymous(x);
     let r: OperationDAGBase
     r = newNode(OperationType.multiply);
-    r->arguments[0].push_back(this);
-    r->arguments[1].push_back(x);
+    r.arguments[0].push_back(this);
+    r.arguments[1].push_back(x);
     return Expr(cache,r);
   }
 

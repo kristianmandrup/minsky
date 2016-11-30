@@ -18,5 +18,7 @@ After core conversion, we need to add a streaming layer that can be used with Rx
 
 Generic View model helpers. Can be used as "mixins" for View Models in a UI framework such as React, Angular or Vue.
 
+## Ideas and libs to explore
 
-
+- [numbers](http://numbers.github.io/calculus.html) with calculus for doing differentiation etc.
+- [tangle](http://worrydream.com/Tangle/) lets you play/interact with graphs to change the underlying equation!
