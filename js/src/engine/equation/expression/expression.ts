@@ -1,47 +1,51 @@
+import SubexpressionCache from '..'
+
 export class Expresssion {
-  SubexpressionCache cache; //for anonymous nodes
+  cache: SubexpressionCache; //for anonymous nodes
 
-  Expr(SubexpressionCache& cache, const NodePtr& x):
-    NodePtr(x), cache(cache) {cache.insertAnonymous(x);}
-  Expr(SubexpressionCache& cache, const shared_ptr<OperationDAGBase>& x):
-    NodePtr(x), cache(cache) {cache.insertAnonymous(x);}
-  Expr(SubexpressionCache& cache, const Node& x):
-    NodePtr(cache.reverseLookup(x)), cache(cache) {assert(*this);}
-  Expr(SubexpressionCache& cache, const WeakNodePtr& x):
-    NodePtr(cache.reverseLookup(*x)), cache(cache) {assert(*this);}
+  constructor(SubexpressionCache cache, const x: any) {
+    cache.insertAnonymous(x);
+  }
 
-  shared_ptr<OperationDAGBase> newNode(OperationType::Type type) const {
-    shared_ptr<OperationDAGBase> r(OperationDAGBase::create(type));
+  newNode(const OperationType.Type type): OperationDAGBase {
+    r(OperationDAGBase.create(type));
     cache.insertAnonymous(r);
     return r;
   }
 
-  Expr operator+(const NodePtr& x) const {
+  add(const NodePtr x): Exprconst {
     cache.insertAnonymous(x);
-    shared_ptr<OperationDAGBase> r=newNode(OperationType::add);
-    r->arguments[0].push_back(*this);
+    let r: OperationDAGBase
+    r = newNode(OperationType.add);
+    r.arguments[0].push_back(this);
+    r.arguments[1].push_back(x);
+    return Expr(cache,r);
+  }
+
+  sub(const NodePtr x): Expr {
+    cache.insertAnonymous(x);
+    let r: OperationDAGBase
+    r = newNode(OperationType.subtract);
+    r.arguments[0].push_back(this);
+    r.arguments[1].push_back(x);
+    return Expr(cache,r);
+  }
+
+  mul(const NodePtr x): Expr {
+    cache.insertAnonymous(x);
+    let r: OperationDAGBase
+    r = newNode(OperationType.multiply);
+    r->arguments[0].push_back(this);
     r->arguments[1].push_back(x);
     return Expr(cache,r);
   }
-  Expr operator-(const NodePtr& x) const {
+
+  div(const NodePtr x): Expr {
     cache.insertAnonymous(x);
-    shared_ptr<OperationDAGBase> r=newNode(OperationType::subtract);
-    r->arguments[0].push_back(*this);
-    r->arguments[1].push_back(x);
+    let r: OperationDAGBase
+    r = newNode(OperationType.divide);
+    r.arguments[0].push_back(this);
+    r.arguments[1].push_back(x);
     return Expr(cache,r);
   }
-  Expr operator*(const NodePtr& x) const {
-    cache.insertAnonymous(x);
-    shared_ptr<OperationDAGBase> r=newNode(OperationType::multiply);
-    r->arguments[0].push_back(*this);
-    r->arguments[1].push_back(x);
-    return Expr(cache,r);
-  }
-  Expr operator/(const NodePtr& x) const {
-    cache.insertAnonymous(x);
-    shared_ptr<OperationDAGBase> r=newNode(OperationType::divide);
-    r->arguments[0].push_back(*this);
-    r->arguments[1].push_back(x);
-    return Expr(cache,r);
-  }
-};
+}
