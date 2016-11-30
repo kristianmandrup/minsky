@@ -1,5 +1,5 @@
 export class GodleyTable {
-  constructor (opts = {}) {
+  constructor (opts: Object = {}) {
     this.opts = opts
   }
 }

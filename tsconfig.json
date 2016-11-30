@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "allowJs": true
+  },
+  "include": [
+    "js/src/**/*"
+  ],
+  "exclude": [
+    "doc",
+    "node_modules",
+    "engine",
+    "model",
+    "server",
+    "schema",
+    "test",
+    "gui-*",
+    "js/test"
+  ]
+}
