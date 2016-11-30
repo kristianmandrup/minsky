@@ -1,0 +1,34 @@
+{
+  "name": "minsky",
+  "version": "1.0.0",
+  "description": "system dynamics for economic modeling",
+  "author": "Kristian Mandrup <kmandrup@gmail.com>",
+  "scripts": {
+    "build": "npm run test && ",
+    "compile:ts": "tsc --outDir ./lib src",
+    "dev": "npm run test -- --watch",
+    "test": "ava src",
+    "lint": "standard",
+    "lint:fix": "standard --fix"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.js"
+    ],
+    "concurrency": 5,
+    "failFast": true,
+    "tap": true,
+    "powerAssert": true,
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "ava": "^0.17.0",
+    "babel-preset-es2017": "^6.16.0",
+    "standard": "^8.6.0",
+    "typescript": "^2.0.10"
+  }
+}

@@ -17,4 +17,5 @@ test/cmpFp
 gui-tk/minsky
 gui-tk/library/tcl
 gui-tk/library/tk
-
+node_modules
+*.log
