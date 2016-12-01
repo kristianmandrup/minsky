@@ -1,11 +1,7 @@
 import VariableDAG from '../variable/dag'
 import Node from '../dag/node'
 import Expr from '../expr'
-
-const derivativeMap = {
-  constant: DerivativeConstant,
-  variable: DerivativeVariable,
-}
+import derivative from './derivative'
 
 export class SystemOfEquations {
   constructor() {
@@ -21,8 +17,9 @@ export class SystemOfEquations {
   }
 
   // we need a single derivative method which delegates to class/factory function for each type
-  derivative(const expr: any, const type: string): Node {
-    const clazz = derivativeMap[type]
+  derivative(const expr: any, type? : string): Node {
+    type = type || expr.type || expr.constructor.name
+    const clazz = derivative[type]
     if (!clazz) {
       throw new Error(`No Derivative class found for type: ${type}`)
     }
